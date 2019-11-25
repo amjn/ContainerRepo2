@@ -23,11 +23,6 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(resources.container.myACRContainer2.tag)'
   imagePullSecret: 'raireg15cfe-auth'
-  
-  
- 
-  # Agent VM image name
-  vmImageName: 'ubuntu-latest'
 
 
 stages:
@@ -36,6 +31,7 @@ stages:
   jobs:  
   - job: PreProdConfig
     displayName: Config update   
+    pool: default
     steps:
     - upload: manifests
       artifact: manifests
