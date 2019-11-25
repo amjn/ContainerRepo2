@@ -58,7 +58,7 @@ stages:
     displayName: Deploy    
     pool:
       vmImage: $(vmImageName)
-    environment: 'zenithworksahsimpleGoRepo-Canary.dev-ns'
+    environment: 'test.default'
     strategy:
       canary:
         increments: [25, 50]
@@ -83,7 +83,7 @@ stages:
             inputs:
               action: $(strategy.action)
            #   kubernetesServiceConnection: ''
-              namespace: 'dev-ns'
+              namespace: 'default'
               strategy: $(strategy.name)
               percentage: $(strategy.increment)
               manifests: |
@@ -107,7 +107,7 @@ stages:
               inputs:
                 action: 'reject'
                # kubernetesServiceConnection: ''
-                namespace: 'dev-ns'
+                namespace: 'default'
                 strategy: $(strategy.name)
                 manifests: |
                   $(Pipeline.workspace)/manifests/deployment.yml
